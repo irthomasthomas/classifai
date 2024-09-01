@@ -110,7 +110,7 @@ Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for det
 ```bash
 class-tweet() {
     local tweet="$1"
-    local threshold=0.2
+    local threshold=0.6
     local class="MACHINE-LEARNING"
 
     result=$(classifai "$tweet" --classes 'PROGRAMMING' 'MACHINE-LEARNING' -m gpt-4o-mini | jq -r '.[0] | select(.classification == "'"$class"'" and .score > '"$threshold"') | .classification')

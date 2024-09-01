@@ -113,7 +113,7 @@ class-tweet() {
     local threshold=0.6
     local class="MACHINE-LEARNING"
 
-    result=$(classifai "$tweet" --classes 'PROGRAMMING' 'MACHINE-LEARNING' -m gpt-4o-mini | jq -r '.[0] | select(.classification == "'"$class"'" and .score > '"$threshold"') | .classification')
+    result=$(classifai "$tweet" --classes 'PROGRAMMING' 'MACHINE-LEARNING' -m openrouter/openai/gpt-4o-mini | jq -r '.[0] | select(.classification == "'"$class"'" and .score > '"$threshold"') | .classification')
 
     if [ -n "$result" ]; then
         echo "Tweet classified as $class with high confidence. Executing demo..."

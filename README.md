@@ -92,7 +92,9 @@ Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for det
    ]
    ```
    ```shell
-  classifai $tweet --classes 'PROGRAMING' 'MACHINE-LEARNING' -m gpt-4o-mini
+   classifai $tweet --classes 'PROGRAMING' 'MACHINE-LEARNING' -m gpt-4o-mini
+   ```
+   ```json
    [
    {
       "content": "Superintelligence is within reach.\n\nBuilding safe superintelligence (SSI) is the most important technical problem of our\u200b\u200b time.\n\nWe've started the world\u2019s first straight-shot SSI lab, with one goal and one product: a safe superintelligence.",
@@ -102,36 +104,24 @@ Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for det
    ]
    ```
 
-## Example Use-Cases
+## Advanced scripts
 
-### 1. Sentiment Analysis
-You can use Classifai to classify text into positive, negative, or neutral sentiments.
-
-
-## Advanced Usage Example: Tweet Classifier
-
-Here's an example of how to use `classifai` in a bash function to classify tweets and perform actions based on the classification:
-
+### Acting on the classification
 ```bash
-classify_tweet() {
-    tweet="$1"
-    result=
-    
-    if [ "$result" == "ai" ]; then
-        echo "🤖 This tweet is about AI: $tweet"
+class-tweet() {
+    local tweet="$1"
+    local threshold=0.2
+    local class="MACHINE-LEARNING"
+
+    result=$(classifai "$tweet" --classes 'PROGRAMMING' 'MACHINE-LEARNING' -m gpt-4o-mini | jq -r '.[0] | select(.classification == "'"$class"'" and .score > '"$threshold"') | .classification')
+
+    if [ -n "$result" ]; then
+        echo "Tweet classified as $class with high confidence. Executing demo..."
+        echo "Demo: This is a highly relevant tweet about $class"
     else
-        echo "🧑 This tweet is not about AI: $tweet"
+        echo "Tweet does not meet classification criteria."
     fi
 }
-
-# Usage examples:
-classify_tweet "ChatGPT is revolutionizing natural language processing."
-classify_tweet "I love watching sunsets at the beach."
 ```
 
-This function uses our `classifai.py` script to determine if a tweet is about AI or not. It then uses `jq` to parse the JSON output and echo an appropriate message with an emoji.
-
-Note: Make sure that `classifai.py` is in your current directory or provide the full path to the script.
-
-You can add this function to your `.bashrc` or `.zshrc` file to use it in your terminal sessions, adjusting the path to `classifai.py` as needed.
 

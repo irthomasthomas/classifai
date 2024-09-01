@@ -1,0 +1,11 @@
+LICENSE
+README.md
+setup.py
+classifai/__init__.py
+classifai/classifai.py
+classifai.egg-info/PKG-INFO
+classifai.egg-info/SOURCES.txt
+classifai.egg-info/dependency_links.txt
+classifai.egg-info/entry_points.txt
+classifai.egg-info/requires.txt
+classifai.egg-info/top_level.txt

@@ -11,9 +11,9 @@ setup(
         'openai',
     ],
     entry_points={
-        'console_scripts': [
-            'classifai=classifai:main',
-        ],
+    'console_scripts': [
+        'classifai=classifai.classifai:main',
+    ],
     },
     author='Thomas Thomas',
     author_email='irthomasthomas@Gmail.com',

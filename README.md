@@ -127,3 +127,49 @@ class-tweet() {
 ```
 
 
+
+
+
+Classifai now supports reading from stdin and writing to stdout, making it easier to use in pipelines and shell scripts.
+
+
+
+You can pipe content into classifai:
+
+```bash
+echo "This is a test sentence" | classifai -c 'positive' 'negative' 'neutral'
+```
+
+Or use heredoc for multiple lines:
+
+```bash
+cat <<EOF | classifai -c 'tech' 'sports' 'politics' -f simple
+AI makes rapid progress
+Football season starts soon
+New tax policy announced
+EOF
+```
+
+
+
+By default, classifai outputs JSON, which can be easily parsed by other tools:
+
+```bash
+echo "OpenAI releases GPT-4" | classifai -c 'tech' 'business' | jq '.[0].class'
+```
+
+For simpler output that's easier to use in shell scripts, use the `-f simple` option:
+
+```bash
+echo "Breaking news: earthquake hits city" | classifai -c 'world' 'local' 'sports' -f simple | cut -f2
+```
+
+This will output only the classified class, making it easy to use in conditionals:
+
+```bash
+if [[  == "world" ]]; then
+    echo "This is world news"
+fi
+```
+
+These enhancements make classifai more versatile and easier to integrate into complex data processing pipelines and shell scripts.

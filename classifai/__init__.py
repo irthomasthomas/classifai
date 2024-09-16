@@ -1,0 +1,1 @@
+from .classifai import main

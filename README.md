@@ -23,16 +23,6 @@ pipx install classifai
 classifai [OPTIONS] CONTENT [CONTENT ...]
 ```
 
-For more details, run `classifai --help`.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Contributing
-
-Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.
-
 ## Usage Examples
 
 1. Multiple classification with Examples:

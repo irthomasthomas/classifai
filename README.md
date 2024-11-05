@@ -24,7 +24,8 @@ pipx install classifai
    classifai  'news.ycombinator.com' 'facebook.com' 'ai.meta.com' \
    --classes 'signal' 'noise' 'neutral' \
    --examples "github.com:signal" "arxiv.org:signal" "instagram.com:noise" \
-   "pintrest.com:noise" "anthropic.ai:signal" "stackoverflow.com:signal" "twitter.com:noise --model openrouter/openai/gpt-4-0314
+   "pintrest.com:noise" "anthropic.ai:signal" "twitter.com:noise" \
+   --model openrouter/openai/gpt-4-0314
    ```
    ```json
    [

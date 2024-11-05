@@ -17,17 +17,14 @@ pip install pipx
 pipx install classifai
 ```
 
-## Usage
-
-```
-classifai [OPTIONS] CONTENT [CONTENT ...]
-```
-
 ## Usage Examples
 
 1. Multiple classification with Examples:
    ```
-   classifai  'news.ycombinator.com' 'facebook.com' 'ai.meta.com' --classes 'signal' 'noise' 'neutral' --examples "github.com:signal" "dailymail.com:noise" "arxiv.org:signal" "instagram.com:noise" "pintrest.com:noise" "anthropic.ai:signal" "stackoverflow.com:signal" "twitter.com:noise --model openrouter/openai/gpt-4-0314
+   classifai  'news.ycombinator.com' 'facebook.com' 'ai.meta.com' \
+   --classes 'signal' 'noise' 'neutral' \
+   --examples "github.com:signal" "arxiv.org:signal" "instagram.com:noise" \
+   "pintrest.com:noise" "anthropic.ai:signal" "stackoverflow.com:signal" "twitter.com:noise --model openrouter/openai/gpt-4-0314
    ```
    ```json
    [

@@ -104,6 +104,19 @@ Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for det
    ]
    ```
 
+4. Verify facts
+   ```shell
+   classifai "<source>$(curl -s docs.jina.ai)</source><statement>Jina ai has an image generation api" -c True False -m gpt-4o --no-content
+   ```
+   ```json
+   [
+     {
+       "class": "false",
+       "score": 0.99997334352929
+     }
+   ]
+   ```
+
 ## Advanced scripts
 
 ### Acting on the classification
@@ -125,8 +138,6 @@ class-tweet() {
     fi
 }
 ```
-
-
 
 
 
@@ -173,3 +184,23 @@ fi
 ```
 
 These enhancements make classifai more versatile and easier to integrate into complex data processing pipelines and shell scripts.
+
+## Using Classifai as a Python Module
+
+Classifai can also be used as a Python module for more advanced use cases. Here's an example of how to use it in your Python code:
+
+```python
+from classifai import Classifai
+
+# Initialize the Classifai model
+model = Classifai(model_name='openrouter/openai/gpt-4-0314')
+
+# Classify a single piece of content
+content = "OpenAI releases GPT-4"
+classes = ['tech', 'business']
+result = model.classify(content, classes)
+
+print(result)
+```
+
+This allows you to integrate Classifai's powerful classification capabilities directly into your Python applications.

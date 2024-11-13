@@ -114,6 +114,26 @@ Class:"""
                 print(f"Max retries reached. An error occurred: {e}")
                 return "Error", 0
 
+def classify_content(
+    content: List[str],
+    classes: List[str],
+    model: str,
+    temperature: float,
+    examples: Optional[List[Dict[str, str]]] = None,
+    custom_prompt: Optional[str] = None,
+    no_content: bool = False
+) -> List[Dict[str, Optional[str]]]:
+    results = []
+    for item in content:
+        winner, probability = get_class_probability(
+            item, classes, model, temperature, examples, custom_prompt
+        )
+        result = {"class": winner, "score": probability}
+        if not no_content:
+            result["content"] = item
+        results.append(result)
+    return results
+
 def main():
     parser = argparse.ArgumentParser(description="Classify content using OpenAI API")
     parser.add_argument("content", nargs='*', help="The content(s) to classify")
@@ -144,16 +164,11 @@ def main():
     
     if not args.content:
         args.content = [line.strip() for line in sys.stdin]
-    results = []
-    for content in args.content:
-        winner, probability = get_class_probability(
-            content, args.classes, args.model, args.temperature, examples, args.prompt
-        )
-        result = {"class": winner, "score": probability}
-        if not args.no_content:
-            result["content"] = content
-        results.append(result)
-        
+    
+    results = classify_content(
+        args.content, args.classes, args.model, args.temperature, examples, args.prompt, args.no_content
+    )
+    
     print(json.dumps(results, indent=2))
 
 if __name__ == "__main__":
